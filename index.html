@@ -1,1 +1,593 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Психолог Мунаева Е.А. — 35 лет опыта</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth;font-size:16px}
+        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:#2C2C2C;background:#FAF7F2;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+        
+        h1,h2,h3{font-weight:700;line-height:1.15;letter-spacing:-0.02em}
+        h1{font-size:clamp(2.2rem,6vw,4rem);font-family:'Playfair Display',serif}
+        h2{font-size:clamp(1.6rem,4vw,2.8rem);margin-bottom:1.2rem;color:#2D5A4A}
+        h3{font-size:clamp(1rem,2vw,1.25rem);font-weight:600}
+        p{margin-bottom:1rem;color:#6B6B6B;line-height:1.7}
+        
+        .container{max-width:1200px;margin:0 auto;padding:0 1.2rem}
+        section{padding:5rem 0;position:relative}
+        
+        /* Nav */
+        nav{position:fixed;top:0;width:100%;background:rgba(250,247,242,0.92);backdrop-filter:blur(20px);z-index:1000;border-bottom:1px solid rgba(45,90,74,0.06);transition:all .4s}
+        nav.scrolled{background:rgba(250,247,242,0.98);box-shadow:0 4px 20px rgba(45,90,74,0.1)}
+        .nav-container{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding:1rem 1.2rem}
+        .logo{font-weight:800;color:#2D5A4A;font-size:1.2rem;text-decoration:none}
+        .nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+        .nav-links a{text-decoration:none;color:#2C2C2C;font-weight:500;font-size:.88rem;position:relative;padding:.4rem 0}
+        .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:#E8B86D;transition:width .3s}
+        .nav-links a:hover::after{width:100%}
+        .nav-cta{padding:.5rem 1.4rem;background:#2D5A4A;color:#fff!important;border-radius:50px;font-weight:600;font-size:.85rem!important;transition:all .3s}
+        .nav-cta:hover{background:#3d7a62;transform:translateY(-2px)}
+        .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.5rem}
+        .hamburger span{width:24px;height:2px;background:#2D5A4A;transition:all .3s;border-radius:2px}
+        .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .hamburger.active span:nth-child(2){opacity:0}
+        .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+        
+        .mobile-menu{position:fixed;top:0;right:-100%;width:85%;max-width:380px;height:100vh;background:#fff;z-index:999;padding:5rem 2rem 2rem;transition:right .4s;box-shadow:-10px 0 40px rgba(0,0,0,.1)}
+        .mobile-menu.active{right:0}
+        .mobile-menu ul{list-style:none}
+        .mobile-menu a{text-decoration:none;color:#2C2C2C;font-size:1.1rem;font-weight:500;display:block;padding:.8rem 0;border-bottom:1px solid #f0f0f0}
+        .overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:998;display:none;opacity:0;transition:opacity .3s}
+        .overlay.active{display:block;opacity:1}
+        
+        /* Hero */
+        .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding-top:70px;background:linear-gradient(135deg,#FAF7F2 0%,#F0EBE3 40%,#E8DCC8 100%)}
+        .hero-bg{position:absolute;inset:0;z-index:0}
+        .hero-bg svg{width:100%;height:100%}
+        .hero-particles{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+        .particle{position:absolute;border-radius:50%;opacity:0;animation:particleFloat 10s infinite ease-in-out}
+        @keyframes particleFloat{0%,100%{opacity:0;transform:translateY(0) scale(0)}15%{opacity:.5}50%{opacity:.2;transform:translateY(-120px) scale(1)}85%{opacity:.05}}
+        .hero-content{position:relative;z-index:2;text-align:center;max-width:800px;padding:1.5rem}
+        .hero-tag{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem 1rem;background:rgba(255,255,255,.7);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.3);border-radius:50px;font-size:.8rem;font-weight:500;color:#2D5A4A;margin-bottom:1.5rem;animation:fadeInUp .8s ease .2s both}
+        .hero-tag::before{content:'';width:6px;height:6px;background:#E8B86D;border-radius:50%;animation:pulse-dot 2s infinite}
+        @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4;transform:scale(1.3)}}
+        .hero h1{color:#2D5A4A;margin-bottom:1.2rem;animation:fadeInUp 1s ease .4s both;background:linear-gradient(135deg,#2D5A4A,#3d7a62);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .hero-subtitle{font-size:clamp(1rem,2.2vw,1.25rem);color:#6B6B6B;margin-bottom:2.5rem;max-width:550px;margin-left:auto;margin-right:auto;animation:fadeInUp 1s ease .6s both}
+        .hero-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeInUp 1s ease .8s both}
+        .cta-button{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:#2D5A4A;color:#fff;text-decoration:none;border-radius:50px;font-weight:600;font-size:.95rem;transition:all .4s;box-shadow:0 4px 16px rgba(45,90,74,.25);border:none;cursor:pointer}
+        .cta-button:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(45,90,74,.35);background:#3d7a62}
+        .cta-button-secondary{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:transparent;color:#2D5A4A;text-decoration:none;border-radius:50px;font-weight:600;font-size:.95rem;transition:all .4s;border:2px solid #2D5A4A;cursor:pointer}
+        .cta-button-secondary:hover{background:#2D5A4A;color:#fff;transform:translateY(-3px)}
+        @keyframes fadeInUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+        
+        /* Section headers */
+        .section-header{text-align:center;margin-bottom:3rem;max-width:650px;margin-left:auto;margin-right:auto}
+        .section-tag{display:inline-block;padding:.3rem .9rem;background:rgba(45,90,74,.08);color:#2D5A4A;border-radius:20px;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.8rem}
+        
+        /* About */
+        .about{background:#fff}
+        .about-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:3rem;align-items:center}
+        .about-visual{position:relative;display:flex;justify-content:center}
+        .about-photo-wrapper{position:relative;width:280px;height:280px}
+        .about-photo-wrapper svg{width:100%;height:100%}
+        .photo-ring{position:absolute;inset:-15px;border:2px dashed #C5A57A;border-radius:50%;opacity:.3;animation:rotate-slow 25s linear infinite}
+        @keyframes rotate-slow{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+        .about-text h2{text-align:left}
+        .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2rem}
+        .stat-item{text-align:center;padding:1.5rem 1rem;background:linear-gradient(135deg,#FAF7F2,#F5F0E8);border-radius:18px;transition:all .4s;border:1px solid rgba(45,90,74,.05)}
+        .stat-item:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(45,90,74,.1)}
+        .stat-number{font-size:2.4rem;font-weight:800;color:#2D5A4A;display:block;line-height:1;margin-bottom:.4rem;font-family:'Playfair Display',serif}
+        .stat-label{color:#6B6B6B;font-size:.82rem;font-weight:500}
+        
+        /* Spec cards */
+        .spec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem}
+        .spec-card{background:#fff;padding:2rem 1.8rem;border-radius:22px;box-shadow:0 2px 12px rgba(45,90,74,.06);transition:all .5s;opacity:0;transform:translateY(25px);border:1px solid rgba(45,90,74,.04)}
+        .spec-card.visible{opacity:1;transform:translateY(0)}
+        .spec-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(45,90,74,.12);border-color:rgba(45,90,74,.08)}
+        .spec-icon{width:56px;height:56px;background:linear-gradient(135deg,#C5A57A,#E8B86D);border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:1.4rem;font-size:1.6rem;box-shadow:0 6px 20px rgba(197,165,122,.25);transition:transform .4s}
+        .spec-card:hover .spec-icon{transform:scale(1.08) rotate(-4deg)}
+        .spec-card h3{margin-bottom:.6rem;color:#2D5A4A;font-size:1.1rem}
+        .spec-card p{font-size:.9rem;margin:0;color:#6B6B6B;line-height:1.6}
+        
+        /* Formats */
+        .formats{background:linear-gradient(180deg,#F5F0E8 0%,#fff 100%)}
+        .formats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+        .format-card{padding:0;border-radius:24px;background:#fff;transition:all .5s;overflow:hidden;box-shadow:0 6px 24px rgba(45,90,74,.08);border:1px solid rgba(45,90,74,.05)}
+        .format-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(45,90,74,.12)}
+        .format-visual{width:100%;height:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+        .format-visual svg{width:75%;height:75%;transition:transform .5s}
+        .format-card:hover .format-visual svg{transform:scale(1.05)}
+        .format-content{padding:1.8rem 2rem 2rem}
+        .format-content h3{color:#2D5A4A;margin-bottom:1rem;font-size:1.15rem}
+        .format-content p{margin-bottom:.6rem;font-size:.9rem}
+        .format-content p strong{color:#2D5A4A;font-weight:600}
+        .format-badge{display:inline-flex;align-items:center;gap:.3rem;padding:.35rem .9rem;background:#FAF7F2;border-radius:50px;font-size:.78rem;color:#6B6B6B;margin-top:.8rem}
+        
+        /* Timeline */
+        .timeline{position:relative;max-width:800px;margin:0 auto}
+        .timeline-line{position:absolute;left:50%;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,#C5A57A,#E8B86D);transform:translateX(-50%);opacity:.2}
+        .timeline-progress{position:absolute;left:50%;top:0;width:3px;background:linear-gradient(to bottom,#2D5A4A,#E8B86D);transform:translateX(-50%);height:0%;transition:height 1.2s ease}
+        .timeline-item{display:flex;justify-content:flex-end;padding-right:50%;position:relative;margin-bottom:3rem;opacity:0;transform:translateX(-30px);transition:all .7s}
+        .timeline-item:nth-child(even){justify-content:flex-start;padding-right:0;padding-left:50%;transform:translateX(30px)}
+        .timeline-item.visible{opacity:1;transform:translateX(0)}
+        .timeline-content{background:#fff;padding:2rem;border-radius:20px;box-shadow:0 4px 16px rgba(45,90,74,.08);max-width:340px;margin:0 2rem;border:1px solid rgba(45,90,74,.05)}
+        .timeline-dot{position:absolute;width:20px;height:20px;background:#fff;border:4px solid #2D5A4A;border-radius:50%;top:2rem;left:50%;transform:translateX(-50%);z-index:2;box-shadow:0 0 0 6px rgba(45,90,74,.08)}
+        .step-number{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;background:linear-gradient(135deg,#2D5A4A,#3d7a62);color:#fff;border-radius:12px;font-weight:700;font-size:1.1rem;margin-bottom:1rem}
+        .timeline-content h3{color:#2D5A4A;margin-bottom:.6rem;font-size:1.1rem}
+        .timeline-content p{margin:0;font-size:.9rem}
+        
+        /* Pricing */
+        .pricing{background:#fff}
+        .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem}
+        .pricing-card{background:linear-gradient(135deg,#FAF7F2,#fff);padding:2rem 1.5rem;border-radius:24px;text-align:center;transition:all .5s;border:2px solid transparent;position:relative;overflow:hidden}
+        .pricing-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#2D5A4A,#E8B86D);opacity:0;transition:opacity .3s}
+        .pricing-card:hover::before{opacity:1}
+        .pricing-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(45,90,74,.12);border-color:rgba(45,90,74,.06)}
+        .pricing-card.featured{border-color:#E8B86D;background:linear-gradient(135deg,#fff,rgba(232,184,109,.04));transform:scale(1.03)}
+        .pricing-card.featured::after{content:'Выгодно';position:absolute;top:.8rem;right:-2rem;background:linear-gradient(135deg,#E8B86D,#C5A57A);color:#fff;padding:.25rem 2.5rem;transform:rotate(45deg);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+        .pricing-card.featured:hover{transform:scale(1.03) translateY(-6px)}
+        .pricing-card h3{color:#2D5A4A;margin-bottom:.4rem;font-size:1rem}
+        .price{font-size:2.4rem;font-weight:800;color:#2D5A4A;margin:.8rem 0;font-family:'Playfair Display',serif}
+        .price-note{font-size:.85rem;color:#6B6B6B;margin:0}
+        
+        /* Booking */
+        .booking-section{background:linear-gradient(135deg,#2D5A4A,#1e3d31);position:relative;overflow:hidden}
+        .booking-section .section-header h2,.booking-section .section-header p{color:#fff}
+        .booking-section .section-tag{background:rgba(255,255,255,.1);color:#E8B86D}
+        .booking-form{max-width:600px;margin:0 auto;background:rgba(255,255,255,.75);backdrop-filter:blur(20px);padding:2.5rem;border-radius:28px;box-shadow:0 20px 60px rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.3)}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+        .form-group{margin-bottom:1rem}
+        .form-group label{display:block;margin-bottom:.4rem;font-weight:500;color:#2D5A4A;font-size:.85rem}
+        .form-group input,.form-group select,.form-group textarea{width:100%;padding:.85rem 1rem;border:2px solid rgba(45,90,74,.1);border-radius:12px;font-family:inherit;font-size:.95rem;transition:all .3s;background:rgba(255,255,255,.8)}
+        .form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:#2D5A4A;box-shadow:0 0 0 4px rgba(45,90,74,.08);background:#fff}
+        .form-group textarea{resize:vertical;min-height:100px}
+        .checkbox-group{display:flex;align-items:flex-start;gap:.6rem;margin-bottom:1.2rem}
+        .checkbox-group input{width:18px;height:18px;margin-top:.1rem;accent-color:#2D5A4A}
+        .checkbox-group label{font-size:.85rem;color:#6B6B6B;line-height:1.4}
+        .checkbox-group a{color:#2D5A4A;font-weight:500}
+        
+        /* FAQ */
+        .faq{background:#FAF7F2}
+        .faq-list{max-width:750px;margin:0 auto}
+        .faq-item{background:#fff;border-radius:18px;margin-bottom:.8rem;overflow:hidden;box-shadow:0 2px 8px rgba(45,90,74,.04);border:1px solid rgba(45,90,74,.03);transition:all .3s}
+        .faq-item:hover{box-shadow:0 4px 16px rgba(45,90,74,.08)}
+        .faq-item.active{box-shadow:0 8px 32px rgba(45,90,74,.1)}
+        .faq-question{width:100%;padding:1.2rem 1.5rem;display:flex;justify-content:space-between;align-items:center;background:none;border:none;cursor:pointer;font-size:1rem;font-weight:600;color:#2C2C2C;text-align:left;font-family:inherit}
+        .faq-question:hover{color:#2D5A4A}
+        .faq-icon{width:28px;height:28px;background:#FAF7F2;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .4s;color:#2D5A4A;font-size:1.1rem;flex-shrink:0;margin-left:.8rem}
+        .faq-item.active .faq-icon{transform:rotate(45deg);background:#2D5A4A;color:#fff}
+        .faq-answer{max-height:0;overflow:hidden;transition:max-height .4s,padding .3s;color:#6B6B6B;padding:0 1.5rem}
+        .faq-item.active .faq-answer{max-height:300px;padding:0 1.5rem 1.2rem}
+        
+        /* Footer */
+        footer{background:linear-gradient(135deg,#1e3d31,#2D5A4A);color:#fff;padding:4rem 0 1.5rem}
+        .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2.5rem;margin-bottom:2.5rem}
+        .footer-section h3{margin-bottom:1.2rem;color:#E8B86D;font-size:1rem;font-weight:600}
+        .footer-section p,.footer-section a{color:rgba(255,255,255,.7);text-decoration:none;line-height:2;transition:all .3s;display:block;font-size:.9rem}
+        .footer-section a:hover{color:#E8B86D;transform:translateX(3px)}
+        .social-links{display:flex;gap:.6rem;margin-top:1.2rem}
+        .social-links a{width:40px;height:40px;background:rgba(255,255,255,.08);border-radius:10px;display:flex;align-items:center;justify-content:center;transition:all .4s;font-size:.8rem;font-weight:600;border:1px solid rgba(255,255,255,.1)}
+        .social-links a:hover{background:#E8B86D;transform:translateY(-3px);border-color:#E8B86D;color:#fff}
+        .footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:1.5rem;text-align:center;color:rgba(255,255,255,.5);font-size:.85rem}
+        .warning-box{background:rgba(232,184,109,.1);border-left:3px solid #E8B86D;padding:1rem 1.2rem;border-radius:0 12px 12px 0;margin:1.5rem 0;font-size:.85rem;color:rgba(255,255,255,.75)}
+        
+        /* AI Chat */
+        .ai-widget{position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999}
+        .ai-button{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#2D5A4A,#3d7a62);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(45,90,74,.3);transition:all .4s;color:#fff;font-size:1.3rem}
+        .ai-button:hover{transform:scale(1.08) rotate(4deg)}
+        .ai-button.pulse{animation:aiPulse 3s infinite}
+        @keyframes aiPulse{0%,100%{box-shadow:0 6px 24px rgba(45,90,74,.3)}50%{box-shadow:0 6px 32px rgba(45,90,74,.5),0 0 0 10px rgba(45,90,74,.08)}}
+        .ai-chat{position:absolute;bottom:72px;right:0;width:360px;max-height:580px;background:#fff;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,.15);display:none;flex-direction:column;overflow:hidden;border:1px solid rgba(0,0,0,.04)}
+        .ai-chat.active{display:flex;animation:chatAppear .35s ease}
+        @keyframes chatAppear{from{opacity:0;transform:translateY(15px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+        .ai-header{background:linear-gradient(135deg,#2D5A4A,#3d7a62);color:#fff;padding:1rem 1.2rem;display:flex;justify-content:space-between;align-items:center}
+        .ai-header h3{font-size:.9rem;display:flex;align-items:center;gap:.4rem;font-weight:600}
+        .ai-status{display:inline-block;width:7px;height:7px;background:#4ade80;border-radius:50%;margin-left:.4rem;box-shadow:0 0 0 3px rgba(74,222,128,.3);animation:statusPulse 2s infinite}
+        @keyframes statusPulse{0%,100%{opacity:1}50%{opacity:.5}}
+        .ai-close{background:none;border:none;color:#fff;font-size:1.4rem;cursor:pointer;opacity:.8;transition:opacity .3s}
+        .ai-close:hover{opacity:1}
+        .ai-messages{flex:1;overflow-y:auto;padding:1.2rem;display:flex;flex-direction:column;gap:.8rem;max-height:380px;background:linear-gradient(180deg,#FAF7F2,#fff)}
+        .ai-message{max-width:85%;padding:.85rem 1rem;border-radius:16px;font-size:.88rem;line-height:1.5;animation:messageSlide .35s ease}
+        @keyframes messageSlide{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+        .ai-message.bot{background:#fff;color:#2C2C2C;align-self:flex-start;border-bottom-left-radius:3px;box-shadow:0 2px 8px rgba(45,90,74,.06);border:1px solid rgba(45,90,74,.05)}
+        .ai-message.user{background:linear-gradient(135deg,#2D5A4A,#3d7a62);color:#fff;align-self:flex-end;border-bottom-right-radius:3px}
+        .ai-message.crisis{background:linear-gradient(135deg,#fef3c7,#fde68a);border:1px solid #fbbf24;color:#92400e}
+        .ai-input-area{padding:.8rem 1.2rem 1.2rem;border-top:1px solid rgba(0,0,0,.05);display:flex;gap:.6rem;background:#fff}
+        .ai-input{flex:1;padding:.75rem 1rem;border:2px solid rgba(45,90,74,.1);border-radius:50px;font-family:inherit;font-size:.88rem;outline:none;transition:all .3s;background:#FAF7F2}
+        .ai-input:focus{border-color:#2D5A4A;box-shadow:0 0 0 3px rgba(45,90,74,.08);background:#fff}
+        .ai-send{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#2D5A4A,#3d7a62);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;flex-shrink:0}
+        .ai-send:hover{transform:scale(1.08)}
+        
+        /* Animations */
+        .fade-in{opacity:0;transform:translateY(25px);transition:opacity .7s,transform .7s}
+        .fade-in.visible{opacity:1;transform:translateY(0)}
+        
+        /* Responsive */
+        @media(max-width:768px){
+            .hamburger{display:flex}
+            .nav-links{display:none}
+            .about-grid{grid-template-columns:1fr;text-align:center;gap:2.5rem}
+            .about-text h2{text-align:center}
+            .stats-grid{grid-template-columns:1fr}
+            .formats-grid{grid-template-columns:1fr}
+            .timeline-item,.timeline-item:nth-child(even){justify-content:flex-start;padding-left:3rem;padding-right:0;transform:translateX(0)}
+            .timeline-line,.timeline-progress{left:1.2rem}
+            .timeline-dot{left:1.2rem}
+            .timeline-content{margin:0;max-width:100%}
+            .ai-chat{position:fixed;bottom:0;right:0;left:0;width:100%;max-height:100vh;border-radius:20px 20px 0 0}
+            .ai-widget{bottom:1rem;right:1rem}
+            .booking-form{padding:1.8rem 1.2rem}
+            .form-row{grid-template-columns:1fr}
+            section{padding:3.5rem 0}
+            .hero-buttons{flex-direction:column;align-items:center}
+            .pricing-card.featured{transform:scale(1)}
+            .pricing-card.featured:hover{transform:scale(1) translateY(-6px)}
+        }
+        @media(max-width:480px){
+            h1{font-size:1.9rem}
+            .about-photo-wrapper{width:220px;height:220px}
+            .booking-form{padding:1.5rem 1rem;border-radius:18px}
+            .hero{min-height:90vh}
+        }
+    </style>
+</head>
+<body>
+
+<nav id="navbar">
+    <div class="nav-container">
+        <a href="#" class="logo">Мунаева Е.А.</a>
+        <ul class="nav-links">
+            <li><a href="#about">О психологе</a></li>
+            <li><a href="#specializations">Направления</a></li>
+            <li><a href="#formats">Форматы</a></li>
+            <li><a href="#process">Как проходит</a></li>
+            <li><a href="#pricing">Стоимость</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#booking" class="nav-cta">Записаться</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+</nav>
+
+<div class="overlay" id="overlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+    <ul>
+        <li><a href="#about">О психологе</a></li>
+        <li><a href="#specializations">Направления</a></li>
+        <li><a href="#formats">Форматы</a></li>
+        <li><a href="#process">Как проходит</a></li>
+        <li><a href="#pricing">Стоимость</a></li>
+        <li><a href="#booking">Записаться</a></li>
+        <li><a href="#faq">FAQ</a></li>
+    </ul>
+</div>
+
+<section class="hero" id="hero">
+    <div class="hero-bg">
+        <svg viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+                <linearGradient id="hg1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#E8DCC8" stop-opacity="0.8"/>
+                    <stop offset="50%" stop-color="#C5D5C0" stop-opacity="0.5"/>
+                    <stop offset="100%" stop-color="#E8DCC8" stop-opacity="0.3"/>
+                </linearGradient>
+                <linearGradient id="hg2" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#C5A57A" stop-opacity="0.15"/>
+                    <stop offset="100%" stop-color="#E8B86D" stop-opacity="0.1"/>
+                </linearGradient>
+            </defs>
+            <rect width="100%" height="100%" fill="#FAF7F2"/>
+            <g>
+                <path class="hw1" d="M-200,450 Q100,350 400,450 T1000,450 T1600,450 V900 H-200Z" fill="url(#hg1)"/>
+                <path class="hw2" d="M-200,550 Q200,450 600,550 T1400,550 T2200,550 V900 H-200Z" fill="url(#hg2)"/>
+                <path class="hw3" d="M-200,650 Q300,550 800,650 T1800,650 V900 H-200Z" fill="url(#hg1)" opacity="0.4"/>
+            </g>
+            <circle cx="200" cy="200" r="80" fill="#E8B86D" opacity="0.1"/>
+            <circle cx="1200" cy="300" r="120" fill="#C5D5C0" opacity="0.15"/>
+            <circle cx="800" cy="700" r="60" fill="#C5A57A" opacity="0.1"/>
+        </svg>
+    </div>
+    <div class="hero-particles" id="heroParticles"></div>
+    <div class="hero-content">
+        <div class="hero-tag">Практикующий психолог с 1989 года</div>
+        <h1>Более 35 лет<br>помогаю найти путь к себе</h1>
+        <p class="hero-subtitle">Специализация: КПТ, гештальт-терапия, семейная терапия, травматерапия</p>
+        <div class="hero-buttons">
+            <a href="#booking" class="cta-button">Записаться →</a>
+            <a href="#about" class="cta-button-secondary">Узнать больше</a>
+        </div>
+    </div>
+</section>
+
+<section class="about" id="about">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-visual fade-in">
+                <div class="about-photo-wrapper">
+                    <div class="photo-ring"></div>
+                    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="ag1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#2D5A4A"/>
+                                <stop offset="100%" stop-color="#C5A57A"/>
+                            </linearGradient>
+                        </defs>
+                        <circle cx="200" cy="200" r="180" fill="url(#ag1)" opacity="0.08"/>
+                        <circle cx="200" cy="200" r="150" fill="#C5D5C0" opacity="0.1"/>
+                        <circle cx="200" cy="200" r="120" fill="url(#ag1)" opacity="0.12"/>
+                        <g transform="translate(200,200)">
+                            <circle cx="0" cy="0" r="80" fill="#2D5A4A" opacity="0.9"/>
+                            <text x="0" y="15" text-anchor="middle" fill="#FAF7F2" font-size="52" font-weight="600">ЕА</text>
+                        </g>
+                        <circle cx="200" cy="200" r="140" fill="none" stroke="#C5A57A" stroke-width="1" stroke-dasharray="8 8" opacity="0.4"/>
+                        <circle cx="200" cy="200" r="170" fill="none" stroke="#E8B86D" stroke-width="1" stroke-dasharray="4 12" opacity="0.3"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="about-text fade-in">
+                <span class="section-tag">О психологе</span>
+                <h2>Мунаева Евгения Анатольевна</h2>
+                <p>Практикующий психолог с высшим медицинским образованием и 35-летним стажем. Использую интегративный подход: КПТ, гештальт, семейная системная терапия, EMDR.</p>
+                <p>Специализация: семьи с приёмными детьми, ПТСР, депрессия, зависимости, семейные кризисы.</p>
+                <div class="stats-grid">
+                    <div class="stat-item"><span class="stat-number" data-target="35">0</span><div class="stat-label">лет практики</div></div>
+                    <div class="stat-item"><span class="stat-number" data-target="10000">0</span><div class="stat-label">консультаций</div></div>
+                    <div class="stat-item"><span class="stat-number" data-target="15">0</span><div class="stat-label">специализаций</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="specializations">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="section-tag">Направления</span>
+            <h2>С чем работаю</h2>
+        </div>
+        <div class="spec-grid">
+            <div class="spec-card fade-in"><div class="spec-icon">🏠</div><h3>Приёмные семьи</h3><p>Адаптация, работа с привязанностью, поддержка родителей</p></div>
+            <div class="spec-card fade-in"><div class="spec-icon">♿</div><h3>Дети с ОВЗ</h3><p>Поддержка семей с особыми образовательными потребностями</p></div>
+            <div class="spec-card fade-in"><div class="spec-icon">🌧️</div><h3>Депрессия</h3><p>КПТ, работа с тревожными мыслями, восстановление сна</p></div>
+            <div class="spec-card fade-in"><div class="spec-icon">🎭</div><h3>Расстройства личности</h3><p>Диагностика, эмоциональная регуляция, отношения</p></div>
+            <div class="spec-card fade-in"><div class="spec-icon">⚡</div><h3>ПТСР</h3><p>EMDR-терапия, работа с травматическим опытом</p></div>
+            <div class="spec-card fade-in"><div class="spec-icon">🔄</div><h3>Реабилитация</h3><p>Сопровождение после зависимостей, профилактика рецидивов</p></div>
+            <div class="spec-card fade-in"><div class="spec-icon">💔</div><h3>Семейные кризисы</h3><p>Помощь в принятии решений, медиация, развод</p></div>
+            <div class="spec-card fade-in"><div class="spec-icon">🔥</div><h3>Выгорание</h3><p>Восстановление мотивации, баланс работа-жизнь</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="formats" id="formats">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="section-tag">Форматы</span>
+            <h2>Форматы работы</h2>
+        </div>
+        <div class="formats-grid">
+            <div class="format-card fade-in">
+                <div class="format-visual" style="background:linear-gradient(135deg,#E8DCC8,#C5D5C0)">
+                    <svg width="200" height="140" viewBox="0 0 200 140">
+                        <rect x="20" y="20" width="80" height="100" rx="10" fill="#2D5A4A" opacity="0.9"/>
+                        <rect x="30" y="40" width="60" height="40" rx="5" fill="#C5A57A" opacity="0.3"/>
+                        <circle cx="60" cy="60" r="15" fill="#E8B86D" opacity="0.5"/>
+                        <rect x="110" y="30" width="70" height="80" rx="10" fill="#C5D5C0" opacity="0.5"/>
+                        <circle cx="145" cy="70" r="20" fill="#2D5A4A" opacity="0.1"/>
+                    </svg>
+                </div>
+                <div class="format-content">
+                    <h3>🏢 Очные консультации</h3>
+                    <p><strong>Адрес:</strong> г. Москва, ул. Примерная, д. 10</p>
+                    <p><strong>Расписание:</strong> Пн-Пт: 10:00–20:00</p>
+                    <div class="format-badge">📍 Карта при подтверждении</div>
+                </div>
+            </div>
+            <div class="format-card fade-in">
+                <div class="format-visual" style="background:linear-gradient(135deg,#C5D5C0,#E8DCC8)">
+                    <svg width="200" height="140" viewBox="0 0 200 140">
+                        <rect x="30" y="30" width="140" height="80" rx="15" fill="#2D5A4A" opacity="0.05" stroke="#2D5A4A" stroke-width="2" stroke-dasharray="6 3"/>
+                        <rect x="50" y="45" width="50" height="50" rx="8" fill="#2D5A4A" opacity="0.8"/>
+                        <circle cx="75" cy="70" r="10" fill="#C5A57A" opacity="0.5"/>
+                        <rect x="115" y="45" width="40" height="60" rx="8" fill="#E8B86D" opacity="0.3"/>
+                        <circle cx="135" cy="75" r="8" fill="#2D5A4A" opacity="0.3"/>
+                    </svg>
+                </div>
+                <div class="format-content">
+                    <h3>💻 Онлайн-сессии</h3>
+                    <p><strong>Платформы:</strong> Zoom, Skype, Telegram</p>
+                    <p><strong>Расписание:</strong> Ежедневно по договорённости</p>
+                    <div class="format-badge">🔗 Инструкция после записи</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="process">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="section-tag">Процесс</span>
+            <h2>Как проходит консультация</h2>
+        </div>
+        <div class="timeline">
+            <div class="timeline-line"></div>
+            <div class="timeline-progress" id="timelineProgress"></div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="step-number">1</div>
+                    <h3>Запись</h3>
+                    <p>Выберите время и формат. Подтверждение в течение 2 часов.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="step-number">2</div>
+                    <h3>Первичная беседа</h3>
+                    <p>30 минут. Уточнение запроса и ожиданий от терапии.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="step-number">3</div>
+                    <h3>Диагностика</h3>
+                    <p>Оценка состояния, индивидуальный план с целями и сроками.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="step-number">4</div>
+                    <h3>Регулярные сессии</h3>
+                    <p>Систематическая работа, корректировка плана, поддержка.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pricing" id="pricing">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="section-tag">Стоимость</span>
+            <h2>Стоимость услуг</h2>
+        </div>
+        <div class="pricing-grid">
+            <div class="pricing-card fade-in"><h3>Первичная</h3><div class="price">X ₽</div><p class="price-note">30 мин</p></div>
+            <div class="pricing-card fade-in"><h3>Индивидуальная</h3><div class="price">X ₽</div><p class="price-note">50 мин</p></div>
+            <div class="pricing-card fade-in"><h3>Семейная</h3><div class="price">X ₽</div><p class="price-note">90 мин</p></div>
+            <div class="pricing-card fade-in"><h3>Онлайн</h3><div class="price">X ₽</div><p class="price-note">50 мин</p></div>
+            <div class="pricing-card featured fade-in"><h3>Пакет 5</h3><div class="price">Y ₽</div><p class="price-note">Скидка Y%</p></div>
+            <div class="pricing-card featured fade-in"><h3>Пакет 10</h3><div class="price">Z ₽</div><p class="price-note">Макс. выгода</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="booking-section" id="booking">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="section-tag">Запись</span>
+            <h2>Записаться на консультацию</h2>
+        </div>
+        <form class="booking-form fade-in" id="bookingForm">
+            <div class="form-row">
+                <div class="form-group"><label>Имя *</label><input type="text" required placeholder="Как к вам обращаться"></div>
+                <div class="form-group"><label>Телефон *</label><input type="tel" required placeholder="+7 (___) ___-__-__"></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>Email</label><input type="email" placeholder="Для подтверждения"></div>
+                <div class="form-group"><label>Формат *</label>
+                    <select required>
+                        <option value="">Выберите формат</option>
+                        <option>Очная консультация</option>
+                        <option>Онлайн (Zoom/Skype)</option>
+                        <option>Первичная (30 мин)</option>
+                        <option>Семейная сессия</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group"><label>Описание запроса</label><textarea placeholder="Что привело вас к психологу?"></textarea></div>
+            <div class="checkbox-group"><input type="checkbox" required><label>Согласен(на) на обработку персональных данных</label></div>
+            <button type="submit" class="cta-button" style="width:100%;justify-content:center">Подтвердить запись →</button>
+        </form>
+    </div>
+</section>
+
+<section class="faq" id="faq">
+    <div class="container">
+        <div class="section-header fade-in"><span class="section-tag">FAQ</span><h2>Частые вопросы</h2></div>
+        <div class="faq-list">
+            <div class="faq-item"><button class="faq-question">Как обеспечивается конфиденциальность?<span class="faq-icon">+</span></button><div class="faq-answer">Всё сказанное остаётся строго конфиденциальным. Исключения — угрозы жизни.</div></div>
+            <div class="faq-item"><button class="faq-question">Сколько длится терапия?<span class="faq-icon">+</span></button><div class="faq-answer">Краткосрочная — 8-12 сессий, среднесрочная — до 6 мес, долгосрочная — от года.</div></div>
+            <div class="faq-item"><button class="faq-question">Как отменить запись?<span class="faq-icon">+</span></button><div class="faq-answer">Перенос за 24 часа. При отмене менее чем за 24ч — оплата полностью.</div></div>
+            <div class="faq-item"><button class="faq-question">Нужно ли готовиться?<span class="faq-icon">+</span></button><div class="faq-answer">Специальной подготовки не требуется. Подумайте, что привело вас к психологу.</div></div>
+            <div class="faq-item"><button class="faq-question">Работаете с подростками?<span class="faq-icon">+</span></button><div class="faq-answer">Да, от 14 лет. До 16 лет — с согласия родителей.</div></div>
+            <div class="faq-item"><button class="faq-question">Что делать в кризисе?<span class="faq-icon">+</span></button><div class="faq-answer">Телефон доверия: 8-800-2000-122. Экстренная помощь: 103.</div></div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-section"><h3>Контакты</h3><p>📞 +7 (XXX) XXX-XX-XX</p><p>✉️ info@example.ru</p><p>📍 г. Москва, ул. Примерная, д. 10</p></div>
+            <div class="footer-section"><h3>Режим работы</h3><p>Пн-Пт: 10:00–20:00</p><p>Сб: 11:00–16:00</p><p>Вс: выходной</p></div>
+            <div class="footer-section"><h3>Соцсети</h3><div class="social-links"><a>TG</a><a>VK</a><a>YT</a><a>IG</a></div></div>
+            <div class="footer-section"><h3>Юр. информация</h3><p>ИНН: XXXXXXXXXX</p><p><a href="#">Политика конфиденциальности</a></p></div>
+        </div>
+        <div class="footer-bottom"><p>© 2026 Мунаева Е.А. Все права защищены.</p></div>
+    </div>
+</footer>
+
+<div class="ai-widget">
+    <div class="ai-chat" id="aiChat">
+        <div class="ai-header"><h3>🤖 AI-Ассистент <span class="ai-status"></span></h3><button class="ai-close" id="aiClose">×</button></div>
+        <div class="ai-messages" id="aiMessages"><div class="ai-message bot">Здравствуйте! Я — AI-ассистент психолога Евгении Анатольевны. Чем могу помочь?</div></div>
+        <div class="ai-input-area"><input class="ai-input" id="aiInput" placeholder="Напишите сообщение..."><button class="ai-send" id="aiSend">➤</button></div>
+    </div>
+    <button class="ai-button pulse" id="aiButton">💬</button>
+</div>
+
+<script>
+// Particles
+const pc=document.getElementById('heroParticles');
+for(let i=0;i<12;i++){let p=document.createElement('div');p.className='particle';let s=Math.random()*18+4;p.style.width=s+'px';p.style.height=s+'px';p.style.left=Math.random()*100+'%';p.style.top=Math.random()*100+'%';p.style.background=['#E8B86D','#C5D5C0','#C5A57A','#2D5A4A'][Math.floor(Math.random()*4)];p.style.animationDelay=Math.random()*6+'s';p.style.animationDuration=(Math.random()*5+7)+'s';pc.appendChild(p)}
+
+// Mobile menu
+const h=document.getElementById('hamburger'),m=document.getElementById('mobileMenu'),o=document.getElementById('overlay');
+function t(){h.classList.toggle('active');m.classList.toggle('active');o.classList.toggle('active');document.body.style.overflow=m.classList.contains('active')?'hidden':''}
+h.addEventListener('click',t);o.addEventListener('click',t);document.querySelectorAll('.mobile-menu a').forEach(l=>l.addEventListener('click',t));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',function(e){e.preventDefault();let t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})}));
+
+// Navbar
+const n=document.getElementById('navbar');
+window.addEventListener('scroll',()=>n.classList.toggle('scrolled',window.scrollY>50));
+
+// Observer
+const ob=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('visible')}),{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.fade-in,.spec-card').forEach(el=>ob.observe(el));
+
+// Counters
+const cob=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting){en.target.querySelectorAll('.stat-number').forEach(c=>{let t=parseInt(c.dataset.target),d=2500,st=t/(d/16),cu=0;const up=()=>{cu+=st;if(cu<t){c.textContent=Math.floor(cu).toLocaleString();requestAnimationFrame(up)}else c.textContent=t.toLocaleString()+(t>=10000?'+':'+')};up()});cob.unobserve(en.target)}}),{threshold:.5});
+let sg=document.querySelector('.stats-grid');if(sg)cob.observe(sg);
+
+// Timeline
+const ti=document.querySelectorAll('.timeline-item'),tp=document.getElementById('timelineProgress');
+const tob=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('visible');let v=document.querySelectorAll('.timeline-item.visible').length;tp.style.height=(v/ti.length*100)+'%'}}),{threshold:.3});
+ti.forEach(i=>tob.observe(i));
+
+// FAQ
+document.querySelectorAll('.faq-question').forEach(b=>b.addEventListener('click',()=>{let i=b.parentElement,a=i.classList.contains('active');document.querySelectorAll('.faq-item').forEach(f=>f.classList.remove('active'));if(!a)i.classList.add('active')}));
+
+// Waves
+const w1=document.querySelector('.hw1'),w2=document.querySelector('.hw2'),w3=document.querySelector('.hw3');let tm=0;
+function aw(){tm+=.003;let y1=450+Math.sin(tm)*40,y2=550+Math.sin(tm*.7+1)*35,y3=650+Math.sin(tm*.5+2)*25;if(w1)w1.setAttribute('d',`M-200,${y1} Q100,${y1-100} 400,${y1} T1000,${y1} T1600,${y1} V900 H-200Z`);if(w2)w2.setAttribute('d',`M-200,${y2} Q200,${y2-100} 600,${y2} T1400,${y2} T2200,${y2} V900 H-200Z`);if(w3)w3.setAttribute('d',`M-200,${y3} Q300,${y3-100} 800,${y3} T1800,${y3} V900 H-200Z`);requestAnimationFrame(aw)}aw();
+
+// AI Chat
+const ab=document.getElementById('aiButton'),ac=document.getElementById('aiChat'),acl=document.getElementById('aiClose'),ai=document.getElementById('aiInput'),as=document.getElementById('aiSend'),am=document.getElementById('aiMessages');let it=false;
+function tc(){ac.classList.toggle('active');ab.classList.toggle('pulse');if(ac.classList.contains('active'))ai.focus()}
+ab.addEventListener('click',tc);acl.addEventListener('click',tc);
+function ams(t,u=false,c=false){let d=document.createElement('div');d.className='ai-message '+(u?'user':'bot')+(c?' crisis':'');d.textContent=t;am.appendChild(d);am.scrollTop=am.scrollHeight}
+function st(){let d=document.createElement('div');d.className='ai-message bot';d.id='typing';d.innerHTML='<div class="typing-indicator"><span></span><span></span><span></span></div>';am.appendChild(d);am.scrollTop=am.scrollHeight;it=true}
+function ht(){let t=document.getElementById('typing');if(t)t.remove();it=false}
+const ck=['суицид','самоубийство','убить себя','порезать','повеситься','передоз','не хочу жить','кончить с собой','самоповреждение','резать'];
+function dc(t){return ck.some(k=>t.toLowerCase().includes(k))}
+function gr(t){let l=t.toLowerCase();if(dc(l))return{text:'⚠️ Я заметил(а), что вы упомянули тяжёлые мысли. Пожалуйста, обратитесь за профессиональной помощью:\n\n📞 Телефон доверия: 8-800-2000-122\n📞 Экстренная помощь: 103\n\nВы не одни.',crisis:true};if(l.includes('запис')||l.includes('консультац')||l.includes('время'))return{text:'Для записи вы можете:\n\n1️⃣ Заполнить форму на сайте\n2️⃣ Позвонить: +7 (XXX) XXX-XX-XX\n3️⃣ Написать в Telegram: @example\n\nКакой формат вам удобнее?'};if(l.includes('цена')||l.includes('стоимость')||l.includes('руб'))return{text:'Стоимость:\n\n• Первичная (30 мин) — X ₽\n• Индивидуальная (50 мин) — X ₽\n• Семейная (90 мин) — X ₽\n• Пакет 5 сессий — скидка Y%\n\nТочная стоимость обсуждается индивидуально.'};if(l.includes('тревога')||l.includes('паника')||l.includes('успокоиться'))return{text:'Техника «Квадратное дыхание»:\n\n🫁 Вдох — 4 сек\n⏸ Задержка — 4 сек\n😮‍💨 Выдох — 4 сек\n⏸ Пауза — 4 сек\n\nПовторите 5-10 циклов. Это снижает тревогу.'};if(l.includes('привет')||l.includes('здравствуй'))return{text:'Здравствуйте! Я могу помочь с:\n\n📅 Записью на консультацию\n💰 Информацией о стоимости\n🧘 Техниками самопомощи\n❓ Ответами на вопросы'};return{text:'Благодарю за сообщение. Я передам его психологу.\n\nЕсли вопрос срочный — позвоните: +7 (XXX) XXX-XX-XX'}}
+function hs(){let t=ai.value.trim();if(!t||it)return;ams(t,true);ai.value='';st();setTimeout(()=>{ht();let r=gr(t);ams(r.text,false,r.crisis)},1200+Math.random()*800)}
+as.addEventListener('click',hs);ai.addEventListener('keypress',e=>{if(e.key==='Enter')hs()});
+
+// Form
+document.getElementById('bookingForm').addEventListener('submit',e=>{e.preventDefault();alert('Спасибо за запись! Мы свяжемся с вами для подтверждения.')});
+</script>
+
+</body>
+</html>
 
